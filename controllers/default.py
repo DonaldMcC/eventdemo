@@ -21,6 +21,7 @@ def form():
 
 def rows():
     rows = db(db.project.id>0).select()
+    response.view='default/rowsdemo.html'
     return dict(rows=rows)
 
 # ---- API (example) -----

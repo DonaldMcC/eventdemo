@@ -1,0 +1,13 @@
+{{extend 'layout.html'}}
+<h3>Basic table</h3>
+{{=rows}}
+<br/>
+<h3>A slightly customised table</h3>
+{{=SQLTABLE(rows,headers='fieldname:capitalize',truncate=100)}}
+<br/>
+<h3>A demo of looping specifically in the view </h3>
+<table><tr><th>Name</th><th>STATUS</th></tr>
+     <tr> {{for row in rows:}}
+     <td>{{=row.proj_name}}</td>
+         <td class="alert-warning"> {{=row.proj_status}}</td></tr>
+        {{pass}}</table>

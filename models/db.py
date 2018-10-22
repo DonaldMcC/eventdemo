@@ -153,17 +153,16 @@ if configuration.get('scheduler.enabled'):
 
 db.define_table('project',
                 Field('proj_name', label='Project Name'),
-                Field('proj_url', label='Project Website'),
+                Field('proj_url', label='Project Website', requires=IS_URL()),
                 Field('proj_status', 'string', label='Project Status', default='Open',
                       requires=IS_IN_SET(['Open', 'Archiving', 'Archived'])),
                 Field('answer_group', 'string', default='Unspecified', label='Restrict Project to Group'),
-                Field('startdate', 'date', label='Start Date',
-                      default=(request.utcnow)),
+                Field('startdate', 'date', label='Start Date', default=(request.utcnow)),
                 Field('enddate', 'date', label='End Date',
                       default=(request.utcnow + datetime.timedelta(days=365))),
                 Field('description', 'text'),
-                Field('proj_owner', 'reference auth_user', writable=False, readable=False, default=auth.user_id,
-                      label='Owner'),
+                Field('proj_owner', 'reference auth_user', writable=False,
+                      readable=False, default=auth.user_id, label='Owner'),
                 Field('createdate', 'datetime', default=request.utcnow, writable=False, readable=False),
                 format='%(proj_name)s')
 
